@@ -20,31 +20,31 @@ public class GameController : MonoBehaviour
     void Start()
     {
         sell_flower_num = flower_group.transform.childCount;
-        int kind_num = Enum.GetNames(typeof(FlowerEnum.kind)).Length;
-        display_flower_kind = SellFlowerRandom(kind_num, sell_flower_num);
+        display_flower_kind = SellFlowerRandom(sell_flower_num);
 
         for (int i = 0; i < sell_flower_num; i++)
         {
             Flower child_flower = flower_group.transform.GetChild(i).gameObject.GetComponent<Flower>();
             child_flower.Initialize(display_flower_kind[i]);
-            Debug.Log(display_flower_kind[i].point_kind);
         }
     }
 
     /// <summary>
     /// 売る花の種類をランダムに決める
     /// </summary>
-    /// <param name="kind_num">花の種類の数</param>
     /// <param name="sell_num">売る花の種類の数</param>
-    /// <returns></returns>
     /// MEMO:同じ花が出てもいっかなという思想でいく
-    private List<FlowerVO> SellFlowerRandom(int kind_num, int sell_num)
+    private List<FlowerVO> SellFlowerRandom(int sell_num)
     {
+        List<FlowerVO> random_flowers = new List<FlowerVO>();
+        random_flowers.AddRange(flowers);
         List<FlowerVO> display_kind = new List<FlowerVO>();
         for (int i=0; i < sell_num; i++)
         {
-            int num = UnityEngine.Random.Range(0, kind_num);
-            display_kind.Add(flowers[num]);
+            int random_num = random_flowers.Count;
+            int num = UnityEngine.Random.Range(0, random_num);
+            display_kind.Add(random_flowers[num]);
+            random_flowers.RemoveAt(num);
         }
         return display_kind;
     }
@@ -65,17 +65,16 @@ public class GameController : MonoBehaviour
             }
         }
         int max_point = point.Max();
-        // Array.IndexOfは最初に見つかったものを返すらしいので、表示されてほしい順番でenumを作る
         switch(Array.IndexOf(point, max_point))
         {
-            case (int)PointEnum.kind.THANK:
-                Debug.Log("THANK");
-                break;
             case (int)PointEnum.kind.RESPECT:
                 Debug.Log("RESPECT");
                 break;
             case (int)PointEnum.kind.LOVE:
                 Debug.Log("LOVE");
+                break;
+            case (int)PointEnum.kind.THANK:
+                Debug.Log("THANK");
                 break;
         }
     }

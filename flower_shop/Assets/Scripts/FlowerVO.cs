@@ -28,11 +28,12 @@ public class FlowerEnum
     }
 }
 
+// Array.IndexOfは最初に見つかったものを返すらしいので、表示されてほしい順番でenumを作る
 public class PointEnum
 {
     public enum kind {
-        LOVE, // 好意
         THANK, // 感謝
         RESPECT, // 尊敬
+        LOVE, // 好意
     }
 }
