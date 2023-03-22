@@ -1,0 +1,11 @@
+flower_shop/.vscode
+flower_shop/Library/*
+flower_shop/Temp/*
+flower_shop/Assets/Resources/Font/*
+flower_shop/Logs/*
+flower_shop/Packages/*
+flower_shop/ProjectSettings/*
+flower_shop/UserSettings/*
+flower_shop/Assembly-CSharp.csproj
+flower_shop/flower_shop.sln
+.DS_Store
