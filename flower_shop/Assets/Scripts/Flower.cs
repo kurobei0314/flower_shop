@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UniRx;
+using System;
 
 public class Flower : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class Flower : MonoBehaviour
     
     private bool is_selected = false;
     public bool IsSelected => is_selected;
+
+    private Subject<int> onClickFlower = new Subject<int>();
+    public IObservable<int> OnClickFlower => onClickFlower;
 
     /// <summary>
     /// 初期化
@@ -34,6 +39,11 @@ public class Flower : MonoBehaviour
     {
         is_selected = !is_selected;
         // TODO: ここに選択したかどうかを表示するようにする
+        if (is_selected){
+            onClickFlower.OnNext(1);
+        } else {
+            onClickFlower.OnNext(-1);
+        }
     }
 
     // Start is called before the first frame update

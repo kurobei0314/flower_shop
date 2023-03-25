@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UniRx;
 
 public class GameController : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Animator anim;
 
+    [SerializeField]
+    private GameObject decide_button;
+
     private List<FlowerVO> display_flower_kind;
     // 売られる花の数（表示される花の数）
     private int sell_flower_num;
+    private int select_num;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +34,16 @@ public class GameController : MonoBehaviour
         {
             Flower child_flower = flower_group.transform.GetChild(i).gameObject.GetComponent<Flower>();
             child_flower.Initialize(display_flower_kind[i]);
+            child_flower.OnClickFlower.Subscribe(num => {
+                select_num += num;
+                if(select_num <= 0){
+                    decide_button.SetActive(false);
+                } else {
+                    decide_button.SetActive(true);
+                }
+            }).AddTo(this);
         }
+        decide_button.SetActive(false);
         anim.SetTrigger("initialize");
     }
 
