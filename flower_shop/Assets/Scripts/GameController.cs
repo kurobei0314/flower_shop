@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject flower_group;
 
+    [SerializeField]
+    private Animator anim;
+
     private List<FlowerVO> display_flower_kind;
     // 売られる花の数（表示される花の数）
     private int sell_flower_num;
@@ -27,6 +30,7 @@ public class GameController : MonoBehaviour
             Flower child_flower = flower_group.transform.GetChild(i).gameObject.GetComponent<Flower>();
             child_flower.Initialize(display_flower_kind[i]);
         }
+        anim.SetTrigger("initialize");
     }
 
     /// <summary>
@@ -69,12 +73,15 @@ public class GameController : MonoBehaviour
         {
             case (int)PointEnum.kind.RESPECT:
                 Debug.Log("RESPECT");
+                anim.SetTrigger("respect");
                 break;
             case (int)PointEnum.kind.LOVE:
                 Debug.Log("LOVE");
+                anim.SetTrigger("love");
                 break;
             case (int)PointEnum.kind.THANK:
                 Debug.Log("THANK");
+                anim.SetTrigger("thank");
                 break;
         }
     }
