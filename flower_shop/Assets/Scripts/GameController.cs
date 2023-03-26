@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayBGM("BGM1");
         sell_flower_num = flower_group.transform.childCount;
         display_flower_kind = SellFlowerRandom(sell_flower_num);
 
@@ -72,6 +73,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnClickDecideButton()
     {
+        AudioManager.Instance.PlaySE("SE2");
         List<Flower> selected_flowers = new List<Flower>();
         int[] point = new int[3]{0,0,0};
         for(int i = 0; i < sell_flower_num; i++) 
@@ -86,15 +88,21 @@ public class GameController : MonoBehaviour
         switch(Array.IndexOf(point, max_point))
         {
             case (int)PointEnum.kind.RESPECT:
-                Debug.Log("RESPECT");
+                //Debug.Log("RESPECT");
+                anim.gameObject.GetComponent<Animation>().Initialize(PointEnum.kind.RESPECT);
+                AudioManager.Instance.PlayBGM("BGM2");
                 anim.SetTrigger("respect");
                 break;
             case (int)PointEnum.kind.LOVE:
-                Debug.Log("LOVE");
+                //Debug.Log("LOVE");
+                anim.gameObject.GetComponent<Animation>().Initialize(PointEnum.kind.LOVE);
+                AudioManager.Instance.PlayBGM("BGM2");
                 anim.SetTrigger("love");
                 break;
             case (int)PointEnum.kind.THANK:
-                Debug.Log("THANK");
+                //Debug.Log("THANK");
+                anim.gameObject.GetComponent<Animation>().Initialize(PointEnum.kind.THANK);
+                AudioManager.Instance.PlayBGM("BGM2");
                 anim.SetTrigger("thank");
                 break;
         }

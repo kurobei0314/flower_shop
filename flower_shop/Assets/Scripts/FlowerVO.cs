@@ -18,12 +18,13 @@ public class FlowerEnum
 {
     public enum kind {
         CARNATION, // カーネーション
-        ROSE, // 薔薇
+        ROSE_RED, // 薔薇(赤)
+        ROSE_WHITE, // 薔薇（白）
         TULIP, // チューリップ
         BABY_BREATH, // かすみ草
-        SUNFLOWER, // ひまわり
+        // SUNFLOWER, // ひまわり
         LISIANTHUS, // トルコキキョウ
-        //GERBERA, // ガーベラ
+        GERBERA, // ガーベラ
         //LILY, // ユリ
     }
 }

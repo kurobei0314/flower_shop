@@ -14,6 +14,12 @@ public class Flower : MonoBehaviour
     [SerializeField]
     RawImage image;
 
+    [SerializeField]
+    GameObject label;
+
+    [SerializeField]
+    GameObject selected_label;
+
     private FlowerVO flower;
     public FlowerVO FlowerVO => flower;
     
@@ -32,16 +38,22 @@ public class Flower : MonoBehaviour
         this.flower = flower;
         flower_name.text = flower.name;
         image.texture = flower.single_image;
-
+        label.SetActive(true);
+        selected_label.SetActive(false);
     }
 
     public void OnClickButton()
     {
+        AudioManager.Instance.PlaySE("SE1");
         is_selected = !is_selected;
         // TODO: ここに選択したかどうかを表示するようにする
         if (is_selected){
+            label.SetActive(false);
+            selected_label.SetActive(true);
             onClickFlower.OnNext(1);
         } else {
+            label.SetActive(true);
+            selected_label.SetActive(false);
             onClickFlower.OnNext(-1);
         }
     }
